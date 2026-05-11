@@ -9,6 +9,10 @@ lerna-debug.log*
 
 node_modules
 .env
+
+# PHP / XAMPP API — local only; GitHub par frontend-only repo
+backend/
+
 dist
 dist-ssr
 .output
