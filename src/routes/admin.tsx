@@ -32,9 +32,11 @@ function AdminLayout() {
           </div>
         </div>
         <nav className="flex-1 p-4 space-y-1">
-          {navItems.map(item => {
-            const active = location.pathname === item.path || (item.path !== '/admin' && location.pathname.startsWith(item.path));
-            const isExact = item.path === '/admin' && location.pathname === '/admin';
+          {navItems.map((item) => {
+            const active =
+              location.pathname === item.path ||
+              (item.path !== "/admin" && location.pathname.startsWith(item.path));
+            const isExact = item.path === "/admin" && location.pathname === "/admin";
             const isActive = isExact || active;
             return (
               <Link
@@ -42,8 +44,8 @@ function AdminLayout() {
                 to={item.path}
                 className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm transition-all ${
                   isActive
-                    ? 'gradient-rose text-primary-foreground shadow-rose'
-                    : 'text-muted-foreground hover:bg-accent hover:text-foreground'
+                    ? "gradient-rose text-primary-foreground shadow-rose"
+                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
                 }`}
               >
                 <item.icon className="w-4 h-4" />
@@ -53,7 +55,10 @@ function AdminLayout() {
           })}
         </nav>
         <div className="p-4 border-t border-border">
-          <Link to="/" className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-all">
+          <Link
+            to="/"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm text-muted-foreground hover:bg-accent hover:text-foreground transition-all"
+          >
             <LogOut className="w-4 h-4" /> Back to Salon
           </Link>
         </div>
@@ -62,15 +67,17 @@ function AdminLayout() {
       {/* Mobile nav */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-50 glass-strong border-t border-border">
         <nav className="flex justify-around py-2">
-          {navItems.map(item => {
-            const active = location.pathname === item.path || (item.path !== '/admin' && location.pathname.startsWith(item.path));
-            const isExact = item.path === '/admin' && location.pathname === '/admin';
+          {navItems.map((item) => {
+            const active =
+              location.pathname === item.path ||
+              (item.path !== "/admin" && location.pathname.startsWith(item.path));
+            const isExact = item.path === "/admin" && location.pathname === "/admin";
             const isActive = isExact || active;
             return (
               <Link
                 key={item.path}
                 to={item.path}
-                className={`flex flex-col items-center gap-0.5 px-2 py-1 text-[10px] ${isActive ? 'text-primary' : 'text-muted-foreground'}`}
+                className={`flex flex-col items-center gap-0.5 px-2 py-1 text-[10px] ${isActive ? "text-primary" : "text-muted-foreground"}`}
               >
                 <item.icon className="w-4 h-4" />
                 {item.label}

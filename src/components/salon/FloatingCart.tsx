@@ -24,13 +24,17 @@ export function FloatingCart({ services, onRemove, onContinue }: Props) {
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <ShoppingBag className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-foreground">{services.length} service{services.length > 1 ? 's' : ''} selected</span>
+            <span className="text-sm font-medium text-foreground">
+              {services.length} service{services.length > 1 ? "s" : ""} selected
+            </span>
           </div>
-          <span className="font-display font-bold text-foreground">Rs. {total.toLocaleString()}</span>
+          <span className="font-display font-bold text-foreground">
+            Rs. {total.toLocaleString()}
+          </span>
         </div>
         <div className="flex flex-wrap gap-2 mb-3 max-h-20 overflow-auto">
           <AnimatePresence>
-            {services.map(s => (
+            {services.map((s) => (
               <motion.div
                 key={s.id}
                 initial={{ scale: 0 }}
@@ -39,7 +43,9 @@ export function FloatingCart({ services, onRemove, onContinue }: Props) {
                 className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-accent text-accent-foreground text-xs"
               >
                 {s.name}
-                <button onClick={() => onRemove(s.id)} className="hover:text-destructive"><X className="w-3 h-3" /></button>
+                <button onClick={() => onRemove(s.id)} className="hover:text-destructive">
+                  <X className="w-3 h-3" />
+                </button>
               </motion.div>
             ))}
           </AnimatePresence>
