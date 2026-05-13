@@ -10,7 +10,6 @@ import {
   Users,
 } from "lucide-react";
 import { useSalonStats } from "@/hooks/use-salon-data";
-import { isRemoteApi } from "@/lib/env";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export const Route = createFileRoute("/admin/")({
@@ -32,37 +31,14 @@ function AdminDashboard() {
 
   return (
     <div className="p-6 md:p-8">
-      <div className="mb-8 flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
+      <div className="mb-8">
         <div>
           <h1 className="font-display text-2xl md:text-3xl font-bold text-foreground">Dashboard</h1>
           <p className="text-sm text-muted-foreground mt-1">
             Welcome back to Sheeza Salon admin panel
           </p>
         </div>
-        {isRemoteApi() && (
-          <p className="text-[11px] text-muted-foreground max-w-md">
-            Live data from MySQL via PHP API. If numbers look empty, import{" "}
-            <code className="text-xs">backend/database.sql</code> in phpMyAdmin and set{" "}
-            <code className="text-xs">VITE_PHP_API_BASE</code> to your API folder URL.
-          </p>
-        )}
       </div>
-
-      {!isRemoteApi() && (
-        <div className="mb-6 rounded-2xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-sm text-foreground">
-          <strong className="font-semibold">
-            MySQL se data yahan tab dikhega jab app API se connect ho.
-          </strong>{" "}
-          Abhi demo mode hai: data sirf browser ke <code className="text-xs">localStorage</code>{" "}
-          mein hai — phpMyAdmin wala database is mode se link nahi hota. Project root mein{" "}
-          <code className="text-xs">.env</code> bana kar likhein{" "}
-          <code className="text-xs">VITE_PHP_API_BASE=http://localhost/APKA_FOLDER/api</code> (jahan
-          PHP <code className="text-xs">index.php</code> hai), phir{" "}
-          <code className="text-xs">npm run dev</code> dubara chalayein. DB check: browser mein{" "}
-          <code className="text-xs break-all">…/api/index.php?resource=ping</code> kholein — row
-          counts dikhne chahiye.
-        </div>
-      )}
 
       {isError && (
         <div className="mb-6 rounded-2xl border border-destructive/30 bg-destructive/10 px-4 py-3 text-sm text-destructive">
