@@ -56,7 +56,7 @@ export function HeroSection() {
             Explore Services
           </a>
           <a
-            href="https://wa.me/923001234567"
+            href="https://wa.me/923059544448"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center justify-center px-8 py-3.5 rounded-full border border-border bg-card text-foreground font-medium hover:bg-accent transition-colors text-sm"

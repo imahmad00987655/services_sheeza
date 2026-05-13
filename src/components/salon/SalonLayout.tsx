@@ -20,7 +20,7 @@ export function SalonHeader() {
         </Link>
         <div className="flex items-center gap-2">
           <a
-            href="https://wa.me/923001234567"
+            href="https://wa.me/923059544448"
             target="_blank"
             rel="noopener noreferrer"
             className="w-9 h-9 rounded-full bg-accent flex items-center justify-center text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
@@ -28,13 +28,13 @@ export function SalonHeader() {
             <MessageCircle className="w-4 h-4" />
           </a>
           <a
-            href="tel:+923001234567"
+            href="tel:+923059544448"
             className="w-9 h-9 rounded-full bg-accent flex items-center justify-center text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
           >
             <Phone className="w-4 h-4" />
           </a>
           <a
-            href="https://instagram.com/sheezasalon"
+            href="https://www.instagram.com/signaturebysheezasaloon?igsh=NDV2azR4bnk0MnY="
             target="_blank"
             rel="noopener noreferrer"
             className="w-9 h-9 rounded-full bg-accent flex items-center justify-center text-accent-foreground hover:bg-primary hover:text-primary-foreground transition-colors"
@@ -63,37 +63,53 @@ export function SalonFooter() {
             <h4 className="font-display font-semibold mb-3">Quick Links</h4>
             <div className="space-y-2 text-sm opacity-80">
               <a
-                href="https://wa.me/923001234567"
+                href="https://wa.me/923059544448"
                 className="flex items-center gap-2 hover:text-rose-gold transition-colors"
               >
                 <MessageCircle className="w-4 h-4" /> WhatsApp
               </a>
               <a
-                href="tel:+923001234567"
+                href="tel:+923059544448"
                 className="flex items-center gap-2 hover:text-rose-gold transition-colors"
               >
                 <Phone className="w-4 h-4" /> Call Us
               </a>
               <a
-                href="https://instagram.com/sheezasalon"
+                href="https://www.instagram.com/signaturebysheezasaloon?igsh=NDV2azR4bnk0MnY="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:text-rose-gold transition-colors"
               >
-                <Globe className="w-4 h-4" /> Globe
+                <Globe className="w-4 h-4" /> Instagram
+              </a>
+              <a
+                href="https://www.tiktok.com/@signaturebysheezasaloon?_r=1&_t=ZS-96FSWPL9v9E"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-rose-gold transition-colors"
+              >
+                <Globe className="w-4 h-4" /> TikTok
+              </a>
+              <a
+                href="https://www.facebook.com/share/1Y8vDKTB5F/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:text-rose-gold transition-colors"
+              >
+                <Globe className="w-4 h-4" /> Facebook
               </a>
             </div>
           </div>
           <div>
             <h4 className="font-display font-semibold mb-3">Location</h4>
             <a
-              href="https://maps.google.com"
+              href="https://g.page/r/CdPc_KCDG2E4EBM/review"
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-start gap-2 text-sm opacity-80 hover:text-rose-gold transition-colors"
             >
               <MapPin className="w-4 h-4 mt-0.5 shrink-0" />
-              <span>123 Beauty Avenue, Main Boulevard, Lahore, Pakistan</span>
+              <span>Leave us a Google review for Signature by SHEEZA Saloon</span>
             </a>
           </div>
         </div>
