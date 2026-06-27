@@ -1,4 +1,5 @@
 import { phpApiBase } from "@/lib/env";
+import { authHeaders } from "@/lib/auth";
 import type { BookingRequest, Category, Service } from "@/lib/salon-store";
 
 function endpoint(query: string): string {
@@ -21,6 +22,44 @@ async function parseJson<T extends { ok: boolean; error?: string }>(res: Respons
   return data;
 }
 
+async function authFetch(url: string, init: RequestInit = {}): Promise<Response> {
+  const headers = new Headers(init.headers);
+  const auth = authHeaders();
+  Object.entries(auth).forEach(([key, value]) => headers.set(key, value));
+  return fetch(url, { ...init, headers });
+}
+
+export interface AdminUserPayload {
+  id: string;
+  email: string;
+  fullName: string;
+  role: string;
+}
+
+export async function remoteLogin(
+  email: string,
+  password: string,
+): Promise<{ token: string; user: AdminUserPayload }> {
+  const res = await fetch(endpoint("?resource=auth&action=login"), {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password }),
+  });
+  const j = await parseJson<{ ok: true; data: { token: string; user: AdminUserPayload } }>(res);
+  return j.data;
+}
+
+export async function remoteLogout(): Promise<void> {
+  const res = await authFetch(endpoint("?resource=auth&action=logout"), { method: "POST" });
+  await parseJson(res);
+}
+
+export async function remoteAuthMe(): Promise<AdminUserPayload> {
+  const res = await authFetch(endpoint("?resource=auth&action=me"));
+  const j = await parseJson<{ ok: true; data: AdminUserPayload }>(res);
+  return j.data;
+}
+
 export interface DashboardStatsPayload {
   totalCategories: number;
   totalServices: number;
@@ -32,7 +71,7 @@ export interface DashboardStatsPayload {
 }
 
 export async function remoteFetchStats(): Promise<DashboardStatsPayload> {
-  const res = await fetch(endpoint("?resource=stats"));
+  const res = await authFetch(endpoint("?resource=stats"));
   const j = await parseJson<{ ok: true; data: DashboardStatsPayload }>(res);
   return j.data;
 }
@@ -50,44 +89,44 @@ export async function remoteFetchServices(): Promise<Service[]> {
 }
 
 export async function remoteFetchRequests(): Promise<BookingRequest[]> {
-  const res = await fetch(endpoint("?resource=requests"));
+  const res = await authFetch(endpoint("?resource=requests"));
   const j = await parseJson<{ ok: true; data: BookingRequest[] }>(res);
   return j.data;
 }
 
 export async function remoteCreateCategory(fd: FormData): Promise<Category> {
-  const res = await fetch(endpoint("?resource=categories"), { method: "POST", body: fd });
+  const res = await authFetch(endpoint("?resource=categories"), { method: "POST", body: fd });
   const j = await parseJson<{ ok: true; data: Category }>(res);
   return j.data;
 }
 
 export async function remoteUpdateCategory(fd: FormData): Promise<Category> {
-  const res = await fetch(endpoint("?resource=categories"), { method: "POST", body: fd });
+  const res = await authFetch(endpoint("?resource=categories"), { method: "POST", body: fd });
   const j = await parseJson<{ ok: true; data: Category }>(res);
   return j.data;
 }
 
 export async function remoteDeleteCategory(id: string): Promise<void> {
-  const res = await fetch(endpoint(`?resource=categories&id=${encodeURIComponent(id)}`), {
+  const res = await authFetch(endpoint(`?resource=categories&id=${encodeURIComponent(id)}`), {
     method: "DELETE",
   });
   await parseJson(res);
 }
 
 export async function remoteCreateService(fd: FormData): Promise<Service> {
-  const res = await fetch(endpoint("?resource=services"), { method: "POST", body: fd });
+  const res = await authFetch(endpoint("?resource=services"), { method: "POST", body: fd });
   const j = await parseJson<{ ok: true; data: Service }>(res);
   return j.data;
 }
 
 export async function remoteUpdateService(fd: FormData): Promise<Service> {
-  const res = await fetch(endpoint("?resource=services"), { method: "POST", body: fd });
+  const res = await authFetch(endpoint("?resource=services"), { method: "POST", body: fd });
   const j = await parseJson<{ ok: true; data: Service }>(res);
   return j.data;
 }
 
 export async function remoteDeleteService(id: string): Promise<void> {
-  const res = await fetch(endpoint(`?resource=services&id=${encodeURIComponent(id)}`), {
+  const res = await authFetch(endpoint(`?resource=services&id=${encodeURIComponent(id)}`), {
     method: "DELETE",
   });
   await parseJson(res);
@@ -97,7 +136,7 @@ export async function remotePatchRequestStatus(
   id: string,
   status: BookingRequest["status"],
 ): Promise<void> {
-  const res = await fetch(endpoint("?resource=requests"), {
+  const res = await authFetch(endpoint("?resource=requests"), {
     method: "PATCH",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ id, status }),
@@ -106,7 +145,7 @@ export async function remotePatchRequestStatus(
 }
 
 export async function remoteDeleteRequest(id: string): Promise<void> {
-  const res = await fetch(endpoint(`?resource=requests&id=${encodeURIComponent(id)}`), {
+  const res = await authFetch(endpoint(`?resource=requests&id=${encodeURIComponent(id)}`), {
     method: "DELETE",
   });
   await parseJson(res);
